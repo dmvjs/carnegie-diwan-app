@@ -54,6 +54,11 @@ module.exports = (function () {
 			analytics.trackEvent('Load', 'Error', 'JSON Parse Error', 10);
 			notify.confirm(message, getFeed, null, [tryAgain, cancel]);
 		});
+
+		/*var otherRequiredFeeds = getOtherRequiredFeeds();
+		otherRequiredFeeds.forEach(function (v, i) {
+			access.get(i);
+		})*/
 	}
 
 	createDir().then(function () {
@@ -70,5 +75,21 @@ module.exports = (function () {
 			}
 		}
 		return 0;
+	}
+
+	function getOtherRequiredFeeds () {
+		var array = [];
+		var firstFound = false;
+		var feedsArray = access.getFeedsFromConfig();
+		for (var i = 0; i < feedsArray.length; i += 1) {
+			if (feedsArray[i] && feedsArray[i].required) {
+				if (firstFound === false) {
+					firstFound = true;
+				} else {
+					array.push(i);
+				}
+			}
+		}
+		return array;
 	}
 }());

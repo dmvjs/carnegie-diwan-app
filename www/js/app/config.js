@@ -5,10 +5,10 @@ var analyticsConfig = require('./analyticsConfig')
 
 module.exports = {
 	fs: void 0
-	, appName: 'Carnegie'
+	, appName: 'Diwan'
 	, track: analyticsConfig.track
 	, trackId: analyticsConfig.trackId
-	, folder: 'com.ceip.carnegie'
+	, folder: 'com.ceip.diwan'
 	, storyFontSize: 1.0
 	, connectionMessage: toLocal(localStrings.noNetworkConnection)
 	, menuMessage: toLocal(localStrings.notYetDownloaded)

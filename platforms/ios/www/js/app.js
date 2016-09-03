@@ -267,10 +267,10 @@ module.exports = {
   , refresh: refresh
   , getFeedsFromConfig: getFeedsFromConfig
 };
-},{"../io/createFileWithContents":24,"../io/doesFileExist":25,"../io/downloadExternalFile":26,"../io/getFileContents":29,"../io/getFileList":31,"../io/removeFile":36,"../util/connection":38,"../util/notify":41,"./config":8,"./config-menu":6,"./xmlToJson":20}],2:[function(require,module,exports){
+},{"../io/createFileWithContents":25,"../io/doesFileExist":26,"../io/downloadExternalFile":27,"../io/getFileContents":30,"../io/getFileList":32,"../io/removeFile":37,"../util/connection":39,"../util/notify":42,"./config":8,"./config-menu":6,"./xmlToJson":21}],2:[function(require,module,exports){
 module.exports = {
     track: true
-    , trackId: 'UA-31877-29'
+    , trackId: 'UA-31877-34'
 };
 },{}],3:[function(require,module,exports){
 var toLocal = require('./ui/getLocalizedString')
@@ -303,7 +303,7 @@ function getBlogs (key) {
 }
 
 module.exports = getBlogs(getKey());
-},{"./ui/getKeyForLanguageOrLocalCenter":11,"./ui/getLocalizedString":12,"./ui/localizedStrings":14}],4:[function(require,module,exports){
+},{"./ui/getKeyForLanguageOrLocalCenter":11,"./ui/getLocalizedString":12,"./ui/localizedStrings":15}],4:[function(require,module,exports){
 var toLocal = require('./ui/getLocalizedString')
     , localStrings = require('./ui/localizedStrings')
     , getKey = require('./ui/getKeyForLanguageOrLocalCenter');
@@ -450,46 +450,32 @@ function getExplore (key) {
 }
 
 module.exports = getExplore(getKey());
-},{"./ui/getKeyForLanguageOrLocalCenter":11,"./ui/getLocalizedString":12,"./ui/localizedStrings":14}],5:[function(require,module,exports){
+},{"./ui/getKeyForLanguageOrLocalCenter":11,"./ui/getLocalizedString":12,"./ui/localizedStrings":15}],5:[function(require,module,exports){
 var toLocal = require('./ui/getLocalizedString')
-    , localStrings = require('./ui/localizedStrings')
-    , getKeyForLanguageOrLocalCenter = require('./ui/getKeyForLanguageOrLocalCenter');
+    , localStrings = require('./ui/localizedStrings');
 
 var menus = [{
     title: ''
     , sub: toLocal(localStrings.readOffline)
-    , feeds: [getLatestAnalysis()]
-}];
-
-function getLanguage () {
-    var key = getKeyForLanguageOrLocalCenter();
-    var language = 'en';
-    if (['ar'].indexOf(key) > -1) {
-        language = key;
-    }
-    return language
-}
-
-function getLatestAnalysis () {
-    var key = getKeyForLanguageOrLocalCenter();
-    var isLang = ['en', 'ar'].indexOf(key) > -1;
-    var language = getLanguage();
-    var urls = {
-        en: 'http://carnegieendowment.org/rss/solr/?fa=AppDiwanEn'
-        , ar: 'http://carnegieendowment.org/rss/solr/?fa=AppDiwanAr'
-    };
-    return {
-        url: urls[key]
+    , feeds: [{
+        url: 'http://carnegieendowment.org/rss/solr/?fa=AppDiwanEn'
         , name: toLocal(localStrings.latestAnalysis)
-        , filename: (isLang ? 'global-' : 'center-') + key + '.json'
+        , filename: 'diwan-en.json'
         , type: 'json'
         , required: true
-        , language: language
-    }
-}
+        , language: 'en'
+    }, {
+        url: 'http://carnegieendowment.org/rss/solr/?fa=AppDiwanAr'
+        , name: toLocal(localStrings.latestAnalysis)
+        , filename: 'diwan-ar.json'
+        , type: 'json'
+        , required: true
+        , language: 'ar'
+    }]
+}];
 
 module.exports = menus;
-},{"./ui/getKeyForLanguageOrLocalCenter":11,"./ui/getLocalizedString":12,"./ui/localizedStrings":14}],6:[function(require,module,exports){
+},{"./ui/getLocalizedString":12,"./ui/localizedStrings":15}],6:[function(require,module,exports){
 var feeds = require('./config-feeds')
     , blogs = require('./config-blogs')
     , resources = require('./config-resources')
@@ -705,7 +691,7 @@ function getResources (key) {
 }
 
 module.exports = getResources(getKey());
-},{"./ui/getKeyForLanguageOrLocalCenter":11,"./ui/getLocalizedString":12,"./ui/localizedStrings":14}],8:[function(require,module,exports){
+},{"./ui/getKeyForLanguageOrLocalCenter":11,"./ui/getLocalizedString":12,"./ui/localizedStrings":15}],8:[function(require,module,exports){
 /*global module, require*/
 var analyticsConfig = require('./analyticsConfig')
 	, toLocal = require('./ui/getLocalizedString')
@@ -713,17 +699,17 @@ var analyticsConfig = require('./analyticsConfig')
 
 module.exports = {
 	fs: void 0
-	, appName: 'Carnegie'
+	, appName: 'Diwan'
 	, track: analyticsConfig.track
 	, trackId: analyticsConfig.trackId
-	, folder: 'com.ceip.carnegie'
+	, folder: 'com.ceip.diwan'
 	, storyFontSize: 1.0
 	, connectionMessage: toLocal(localStrings.noNetworkConnection)
 	, menuMessage: toLocal(localStrings.notYetDownloaded)
 	, missingImage: 'data:image/png;base64,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'
 	, missingImageRef: void 0
 };
-},{"./analyticsConfig":2,"./ui/getLocalizedString":12,"./ui/localizedStrings":14}],9:[function(require,module,exports){
+},{"./analyticsConfig":2,"./ui/getLocalizedString":12,"./ui/localizedStrings":15}],9:[function(require,module,exports){
 module.exports = function () {
 	var config = require('./config')
 		, notify = require('../util/notify')
@@ -753,7 +739,7 @@ module.exports = function () {
 		doesFileExist(config.missingImage.split('/').pop()).then(init, getImage);
 	})
 }
-},{"../io/doesFileExist":25,"../io/downloadExternalFile":26,"../util/notify":41,"./config":8,"./ui/getLocalizedString":12,"./ui/localizedStrings":14}],10:[function(require,module,exports){
+},{"../io/doesFileExist":26,"../io/downloadExternalFile":27,"../util/notify":42,"./config":8,"./ui/getLocalizedString":12,"./ui/localizedStrings":15}],10:[function(require,module,exports){
 var header = require('./ui/header');
 document.addEventListener("backbutton", onBackKeyDown, false);
 
@@ -798,7 +784,10 @@ module.exports = function (options, language) {
 };
 },{}],13:[function(require,module,exports){
 /*global $, require, module */
-var story = require('./story');
+var story = require('./story')
+	, toLocal = require('./getLocalizedString')
+	, localStrings = require('./localizedStrings')
+	, loading = require('./loading');
 
 $(document)
 	.on('touchstart', 'header .show-menu', function (e) {
@@ -824,6 +813,32 @@ $(document)
 		setTimeout(function () {
 			showStoryList();
 			ui.removeClass('active');
+		}, 100);
+	})
+	.on('touchend', 'header .story-list .toggle-feed', function (e) {
+		loading.show();
+		setTimeout(function () {
+
+			var activeIndex = $('.menu-item.active').index();
+
+			if (activeIndex === 0) {
+				$(document.body).addClass('arabic-ui');
+				window.__languageForCarnegie = "ar";
+				setBackLabelText(toLocal(localStrings.back));
+			} else {
+				$(document.body).removeClass('arabic-ui');
+				window.__languageForCarnegie = "en";
+				setBackLabelText(toLocal(localStrings.back));
+			}
+
+			$('.menu-item').eq(activeIndex).removeClass('active');
+			var newItem = $('.menu-item').eq(activeIndex === 0 ? 1 : 0);
+			newItem.addClass('active');
+			newItem.find('.menu-link').click();
+			setTimeout(function () {
+				loading.hide();
+			}, 1);
+
 		}, 100);
 	});
 
@@ -915,7 +930,22 @@ module.exports = {
 	, showStory: showStory
 	, setBackLabelText: setBackLabelText
 };
-},{"./story":18}],14:[function(require,module,exports){
+},{"./getLocalizedString":12,"./loading":14,"./localizedStrings":15,"./story":19}],14:[function(require,module,exports){
+function hide (){
+    $('.loading-ui').fadeOut();
+}
+
+function show (){
+    $('.loading-ui').fadeIn();
+}
+
+
+
+module.exports = {
+    hide: hide,
+    show: show
+};
+},{}],15:[function(require,module,exports){
 /**
  * Created by kirk on 4/16/16.
  */
@@ -1161,7 +1191,7 @@ module.exports = {
         ru: "Вашингтон"
     }
 };
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /*global module, require, $*/
 
 var config = require('../config')
@@ -1236,8 +1266,8 @@ var config = require('../config')
 						var obj = (JSON.parse(contents.target._result));
 						update(filename, toLocal(localStrings.updatedColon) + date.getFriendlyDate(obj));
 						box.addClass('checked');
-					}, function (e){console.log(e)});
-				}, function (e){console.log(e)});
+					}, function (e){console.log(e);console.log(filename)});
+				}, function (e){console.log(e);console.log(filename)});
 
 				list.append(item);
 			})
@@ -1413,7 +1443,7 @@ $(document).on('access.refresh', function (e, obj, filename) {
 module.exports = {
 	update: update
 };
-},{"../../io/doesFileExist":25,"../../io/getFileContents":29,"../../util/date":39,"../../util/notify":41,"../access":1,"../config":8,"../config-menu":6,"./getLocalizedString":12,"./header":13,"./localizedStrings":14,"./storyList":19}],16:[function(require,module,exports){
+},{"../../io/doesFileExist":26,"../../io/getFileContents":30,"../../util/date":40,"../../util/notify":42,"../access":1,"../config":8,"../config-menu":6,"./getLocalizedString":12,"./header":13,"./localizedStrings":15,"./storyList":20}],17:[function(require,module,exports){
 var access = require('../access');
 
 Hammer.defaults.stop_browser_behavior.touchAction = 'pan-y';
@@ -1648,7 +1678,7 @@ module.exports = {
 }
 
 
-},{"../access":1}],17:[function(require,module,exports){
+},{"../access":1}],18:[function(require,module,exports){
 module.exports = (function () {
   var win = $(window)
     , w = win.width()
@@ -1658,7 +1688,7 @@ module.exports = (function () {
 	  $('body').addClass('tablet');
   }
 }());
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /*global module, require, $*/
 
 var config = require('../config')
@@ -1977,7 +2007,7 @@ function showAndUpdate(index) {
 module.exports = {
   show: show, next: next, previous: previous, hide: hideTextResize
 };
-},{"../../util/date":39,"../../util/notify":41,"../access":1,"../config":8}],19:[function(require,module,exports){
+},{"../../util/date":40,"../../util/notify":42,"../access":1,"../config":8}],20:[function(require,module,exports){
 /*global require, module, $*/
 var config = require('../config')
     , access = require('../access')
@@ -2059,17 +2089,6 @@ function show(feedObj, forceActive) {
 
     $('.container section.story-list').replaceWith(section);
 
-		/*$('#story-list-container').on('touchmove touchend', function () {
-			var pos = parseInt($('#story-list-container').offset().top, 10);
-			var lastLi = $('#story-list-container').find('ul').find('li').last();
-			var fLi = $('#story-list-container').find('ul').find('li').first();
-			if (pos <= -500) {
-				$('#story-list-container').offset({top:lastLi.offset().top})
-			} else if (pos > 44) {
-				$('#story-list-container').offset({top:fLi.offset().top})
-			}
-		});*/
-
     $('.story-item').on('click', function (e) {
         if (e.clientY > (parseInt($('header').height()) + 5)) {
             if (connection.get() === 'none') {
@@ -2083,15 +2102,13 @@ function show(feedObj, forceActive) {
 
             $('.story-item.active').removeClass('active');
             $(this).addClass('active');
-            story.show(index, feed).then(function () {
-                header.showStory();
-            });
+            story.show(index, feed).then(header.showStory);
             sent = true;
         }
     });
 
     $('.story-image').on('error', function (e) {
-      $(this).prop('src', config.missingImageRef.toURL());
+      $(this).prop('src', config.missingImage);
     });
     setTimeout(function () {
 			if (allowRefresh) {
@@ -2114,7 +2131,7 @@ $(document).on('access.refresh', function (e, obj) {
 module.exports = {
 	show: show
 };
-},{"../../util/connection":38,"../../util/date":39,"../../util/notify":41,"../access":1,"../config":8,"./getLocalizedString":12,"./header":13,"./localizedStrings":14,"./refresh":16,"./story":18}],20:[function(require,module,exports){
+},{"../../util/connection":39,"../../util/date":40,"../../util/notify":42,"../access":1,"../config":8,"./getLocalizedString":12,"./header":13,"./localizedStrings":15,"./refresh":17,"./story":19}],21:[function(require,module,exports){
 /*global module, require*/
 module.exports = function (res) {
 	var feedObject = {item:[]}
@@ -2144,7 +2161,7 @@ module.exports = function (res) {
 
   return feedObject;
 };
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -2183,40 +2200,6 @@ module.exports = (function () {
 			require('./init');
 		}
 
-		function getCountryCodeFromSim () {
-			window.plugins.carrier.getCarrierInfo(
-				function (data) {
-					var testing = false;
-					if (testing) {
-						window.__localCenter = "moscow"
-					} else
-					// only use SIM-based country lookup when no previous laguage override exists (English)
-					if (window.__languageForCarnegie === undefined && data && data["countryCode"] !== undefined) {
-						var cc = data["countryCode"];
-						var countries = {
-							moscow: ["RU", "UA", "BY", "MD", "AZ", "GE", "EE", "LV", "LT"],
-							beijing: ["CN", "HK", "MO", "SG", "TW", "JP", "KP", "KR", "MM", "LA", "TH", "KH", "VN", "MY", "PH", "ID"],
-							beirut: ["BH", "IR", "IQ", "IL", "JO", "LB", "PS", "SA", "SY", "TR", "AE", "YE", "DZ", "EG", "LY", "MR", "MA", "SD", "TN", "ML"],
-							brussels: ["FR", "DE", "GB", "IE", "ES", "PT", "BE", "NL", "DK", "NO", "SE", "FI", "PL", "CZ", "AT", "IT", "HU", "GR", "SK"],
-							newDelhi: ["IN", "PK", "AF", "BD", "NP", "LK"]
-						};
-						for (var key in countries) {
-							if (countries.hasOwnProperty(key)) {
-								if (countries[key].indexOf(cc) > -1) {
-									window.__localCenter = key
-								}
-							}
-						}
-					}
-					analytics.trackEvent('Country Code', 'Load', data && data['countryCode'] || "undefined", 10);
-					startApp()
-				}, function () {
-					analytics.trackEvent('Country Code', 'Fail', "No country code detected from SIM", 10);
-					startApp()
-				}
-			);
-		}
-
 		function appInit () {
 			$(function () {
 				if (analyticsConfig.track && analytics) {
@@ -2232,27 +2215,21 @@ module.exports = (function () {
 							if (language.value.indexOf("ar") > -1) {
 								window.__languageForCarnegie = "ar";
 								body.addClass('arabic-ui');
-							} else if (language.value.indexOf("ru") > -1) {
-								window.__languageForCarnegie = "ru";
-								body.addClass('russian-ui');
-							} else if (language.value.indexOf("zh") > -1) {
-								window.__languageForCarnegie = "zh";
-								body.addClass('chinese-ui');
 							}
 						}
-						getCountryCodeFromSim();
+						startApp();
 					},
 					function () {
 						alert("no language");
 						analytics.trackEvent('Language', 'Fail', "No preferred language detected", 10);
-						getCountryCodeFromSim();
+						startApp();
 					}
 				);
 			});
 		}
 }());
 
-},{"./app/analyticsConfig":2,"./app/history":10,"./init":22}],22:[function(require,module,exports){
+},{"./app/analyticsConfig":2,"./app/history":10,"./init":23}],23:[function(require,module,exports){
 /*global module, require, $*/
 module.exports = (function () {
 	var access = require('./app/access')
@@ -2309,6 +2286,11 @@ module.exports = (function () {
 			analytics.trackEvent('Load', 'Error', 'JSON Parse Error', 10);
 			notify.confirm(message, getFeed, null, [tryAgain, cancel]);
 		});
+
+		/*var otherRequiredFeeds = getOtherRequiredFeeds();
+		otherRequiredFeeds.forEach(function (v, i) {
+			access.get(i);
+		})*/
 	}
 
 	createDir().then(function () {
@@ -2326,8 +2308,24 @@ module.exports = (function () {
 		}
 		return 0;
 	}
+
+	function getOtherRequiredFeeds () {
+		var array = [];
+		var firstFound = false;
+		var feedsArray = access.getFeedsFromConfig();
+		for (var i = 0; i < feedsArray.length; i += 1) {
+			if (feedsArray[i] && feedsArray[i].required) {
+				if (firstFound === false) {
+					firstFound = true;
+				} else {
+					array.push(i);
+				}
+			}
+		}
+		return array;
+	}
 }());
-},{"./app/access":1,"./app/downloadMissingImage":9,"./app/ui/getLocalizedString":12,"./app/ui/header":13,"./app/ui/localizedStrings":14,"./app/ui/menu":15,"./app/ui/responsive":17,"./app/ui/storyList":19,"./io/createDir":23,"./io/doesFileExist":25,"./util/connection":38,"./util/date":39,"./util/err":40,"./util/notify":41}],23:[function(require,module,exports){
+},{"./app/access":1,"./app/downloadMissingImage":9,"./app/ui/getLocalizedString":12,"./app/ui/header":13,"./app/ui/localizedStrings":15,"./app/ui/menu":16,"./app/ui/responsive":18,"./app/ui/storyList":20,"./io/createDir":24,"./io/doesFileExist":26,"./util/connection":39,"./util/date":40,"./util/err":41,"./util/notify":42}],24:[function(require,module,exports){
 var getFileSystem = require('./getFileSystem')
 	, getFile = require('./getFile')
 	, makeDir = require('./makeDir')
@@ -2345,7 +2343,7 @@ module.exports = function () {
 		}, reject);
 	})
 };
-},{"../app/config":8,"../util/notify":41,"./getFile":28,"./getFileSystem":32,"./makeDir":33}],24:[function(require,module,exports){
+},{"../app/config":8,"../util/notify":42,"./getFile":29,"./getFileSystem":33,"./makeDir":34}],25:[function(require,module,exports){
 /*global module, require*/
 var getFileSystem = require('./getFileSystem')
 	, getFile = require('./getFile')
@@ -2378,7 +2376,7 @@ module.exports = function (filename, contents) {
 		}, reject);
 	})
 };
-},{"./getFile":28,"./getFileEntry":30,"./getFileSystem":32,"./writeFile":37}],25:[function(require,module,exports){
+},{"./getFile":29,"./getFileEntry":31,"./getFileSystem":33,"./writeFile":38}],26:[function(require,module,exports){
 var getFileSystem = require('./getFileSystem')
 	, getFile = require('./getFile');
 
@@ -2388,8 +2386,8 @@ module.exports = function (filename) {
 			getFile(filesystem, filename).then(resolve, reject);
 		}, reject)
 	})
-}
-},{"./getFile":28,"./getFileSystem":32}],26:[function(require,module,exports){
+};
+},{"./getFile":29,"./getFileSystem":33}],27:[function(require,module,exports){
 var config = require('../app/config')
 	, getFileSystem = require('./getFileSystem')
 	, getFile = require('./getFile')
@@ -2406,7 +2404,7 @@ module.exports = function (url) {
 		}) 
 	})
 }
-},{"../app/config":8,"./downloadFile":27,"./getFile":28,"./getFileSystem":32}],27:[function(require,module,exports){
+},{"../app/config":8,"./downloadFile":28,"./getFile":29,"./getFileSystem":33}],28:[function(require,module,exports){
 var config = require('../app/config');
 
 module.exports = function (fileentry, url) {
@@ -2426,7 +2424,7 @@ module.exports = function (fileentry, url) {
     fileTransfer.download(uri, path, resolve, catchErrors, false, {})
   });
 };
-},{"../app/config":8}],28:[function(require,module,exports){
+},{"../app/config":8}],29:[function(require,module,exports){
 var config = require('../app/config');
 
 module.exports = function (filesystem, filename, create) {
@@ -2434,8 +2432,8 @@ module.exports = function (filesystem, filename, create) {
 	return new Promise(function (resolve, reject) {
 		fs.getFile(filename, {create: !!create, exclusive: false}, resolve, reject);
 	});
-}
-},{"../app/config":8}],29:[function(require,module,exports){
+};
+},{"../app/config":8}],30:[function(require,module,exports){
 var getFileSystem = require('./getFileSystem')
   , getFile = require('./getFile')
   , readFile = require('./readFile');
@@ -2449,13 +2447,13 @@ module.exports = function (filename) {
     }, reject);
   })
 }
-},{"./getFile":28,"./getFileSystem":32,"./readFile":35}],30:[function(require,module,exports){
+},{"./getFile":29,"./getFileSystem":33,"./readFile":36}],31:[function(require,module,exports){
 module.exports = function (fileentry) {
 	return new Promise(function (resolve, reject) {
 		fileentry.createWriter(resolve, reject);
 	})
 };
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 var getFileSystem = require('./getFileSystem')
   , readDirectory = require('./readDirectory');
 
@@ -2466,13 +2464,13 @@ module.exports = function (filename) {
     }, reject);
   })
 }
-},{"./getFileSystem":32,"./readDirectory":34}],32:[function(require,module,exports){
+},{"./getFileSystem":33,"./readDirectory":35}],33:[function(require,module,exports){
 module.exports = function () {
 	return new Promise(function (resolve, reject) {
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, resolve, reject)
 	})
 };
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 var config = require('../app/config');
 
 module.exports = function (filesystem, dirname) {
@@ -2481,7 +2479,7 @@ module.exports = function (filesystem, dirname) {
 		fileentry.getDirectory(dirname, {create: true, exclusive: false}, resolve, reject);
 	});
 }
-},{"../app/config":8}],34:[function(require,module,exports){
+},{"../app/config":8}],35:[function(require,module,exports){
 var config = require('../app/config');
 
 module.exports = function (filesystem) {
@@ -2492,7 +2490,7 @@ module.exports = function (filesystem) {
 		reader.readEntries(resolve, reject);
 	});
 }
-},{"../app/config":8}],35:[function(require,module,exports){
+},{"../app/config":8}],36:[function(require,module,exports){
 /*global module, require*/
 var removeFile = require('./removeFile');
 
@@ -2521,13 +2519,13 @@ module.exports = function (fileentry) {
 		})
 	});
 };
-},{"./removeFile":36}],36:[function(require,module,exports){
+},{"./removeFile":37}],37:[function(require,module,exports){
 module.exports = function (fileentry) {
     return new Promise(function (resolve, reject) {
         fileentry.remove(resolve, reject)
     });
 };
-},{}],37:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 module.exports = function (filewriter, contents) {
   return new Promise(function (resolve, reject) {
     filewriter.onwriteend = resolve;
@@ -2537,7 +2535,7 @@ module.exports = function (filewriter, contents) {
 }
 
 
-},{}],38:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 /*global require, module, $*/
 var notify = require('./notify')
 	, config = require('../app/config');
@@ -2563,7 +2561,7 @@ module.exports = {
 	, offline: offline
 	, get: get
 };
-},{"../app/config":8,"./notify":41}],39:[function(require,module,exports){
+},{"../app/config":8,"./notify":42}],40:[function(require,module,exports){
 
 function getLocalDate (options) {
     var year = options.year;
@@ -2707,11 +2705,11 @@ function standardHour (time, ampm) {
     }
     return void 0;
 }
-},{}],40:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 module.exports = function (reason) {
 	console.log(reason);
 };
-},{}],41:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 var config = require('../app/config')
 	, toLocal = require('../app/ui/getLocalizedString')
 	, localStrings = require('../app/ui/localizedStrings');
@@ -2744,4 +2742,4 @@ module.exports = {
 	y: y,
 	n: n
 };
-},{"../app/config":8,"../app/ui/getLocalizedString":12,"../app/ui/localizedStrings":14}]},{},[21]);
+},{"../app/config":8,"../app/ui/getLocalizedString":12,"../app/ui/localizedStrings":15}]},{},[22]);

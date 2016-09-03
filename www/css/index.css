@@ -159,6 +159,16 @@ header .menu .show-menu {
     background-size: auto 44px;
 }
 
+header .story-list .toggle-feed {
+    height: 44px;
+    width: 44px;
+    float: left;
+    background-image: url('../img/header-btn-story-menu.png');
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: auto 44px;
+}
+
 .arabic-ui header .story-list .show-menu,
 .arabic-ui header .menu .show-menu {
     float: left;
@@ -168,8 +178,18 @@ header .menu .show-menu {
     transform: scaleX(-1);
 }
 
+.arabic-ui header .story-list .toggle-feed {
+    float: right;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
 .tablet header .story-list .show-menu,
-.tablet header .menu .show-menu {
+.tablet header .menu .show-menu,
+.tablet header .story-list .toggle-feed
+{
     height: 66px;
     width: 66px;
     background-size: auto 66px;
@@ -251,7 +271,7 @@ header .story .back .label {
     color: white;
     height: 44px;
     display: inline-block;
-    float: left;
+    text-align: left;
     line-height: 44px;
 }
 
@@ -275,6 +295,10 @@ header .story .back.active .label {
 
 .arabic-ui header .story .back {
     float: right;
+}
+
+.arabic-ui header .story .back .label {
+    text-align: right;
 }
 
 .arabic-ui header .story .back .arrow {
@@ -340,6 +364,31 @@ header .story .btn-group .next {
 .arabic-ui header .story .btn-group .previous,
 .arabic-ui header .story .btn-group .next {
     float: left;
+}
+
+.loading-ui {
+    display: none;
+    position: fixed;
+    left: 35vw;
+    right: 35vw;
+    top: calc(50vh - 15vw);
+    bottom: calc(50vh - 15vw);
+    background-color: rgba(0,0,0,0.93);
+    color: white;
+    z-index: 2;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.loading-ui .label {
+    margin-top: 8vw;
+    font-size: 20px;
+}
+
+.loading-ui .loading {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2vw;
 }
 
 /* end of header styles */
@@ -1420,7 +1469,8 @@ footer.story-footer .spacer {
     }
 }
 
-#pullrefresh .icon.loading {
+#pullrefresh .icon.loading,
+.loading-ui .loading {
     background: url('../img/spinner.png') no-repeat;
     width: 22px;
     height: 22px;

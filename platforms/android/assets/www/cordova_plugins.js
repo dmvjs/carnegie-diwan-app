@@ -259,7 +259,8 @@ module.exports.metadata =
     "org.apache.cordova.inappbrowser": "0.6.0",
     "org.apache.cordova.network-information": "0.2.15",
     "org.apache.cordova.splashscreen": "1.0.0",
-    "br.com.dtmtec.plugins.carrier": "1.0.0"
+    "br.com.dtmtec.plugins.carrier": "1.0.0",
+    "sk.kcorp.cordova.ios-security": "0.3.0"
 }
 // BOTTOM OF METADATA
 });

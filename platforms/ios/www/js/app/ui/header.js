@@ -1,5 +1,8 @@
 /*global $, require, module */
-var story = require('./story');
+var story = require('./story')
+	, toLocal = require('./getLocalizedString')
+	, localStrings = require('./localizedStrings')
+	, loading = require('./loading');
 
 $(document)
 	.on('touchstart', 'header .show-menu', function (e) {
@@ -25,6 +28,32 @@ $(document)
 		setTimeout(function () {
 			showStoryList();
 			ui.removeClass('active');
+		}, 100);
+	})
+	.on('touchend', 'header .story-list .toggle-feed', function (e) {
+		loading.show();
+		setTimeout(function () {
+
+			var activeIndex = $('.menu-item.active').index();
+
+			if (activeIndex === 0) {
+				$(document.body).addClass('arabic-ui');
+				window.__languageForCarnegie = "ar";
+				setBackLabelText(toLocal(localStrings.back));
+			} else {
+				$(document.body).removeClass('arabic-ui');
+				window.__languageForCarnegie = "en";
+				setBackLabelText(toLocal(localStrings.back));
+			}
+
+			$('.menu-item').eq(activeIndex).removeClass('active');
+			var newItem = $('.menu-item').eq(activeIndex === 0 ? 1 : 0);
+			newItem.addClass('active');
+			newItem.find('.menu-link').click();
+			setTimeout(function () {
+				loading.hide();
+			}, 1);
+
 		}, 100);
 	});
 

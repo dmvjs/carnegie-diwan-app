@@ -1,38 +1,24 @@
 var toLocal = require('./ui/getLocalizedString')
-    , localStrings = require('./ui/localizedStrings')
-    , getKeyForLanguageOrLocalCenter = require('./ui/getKeyForLanguageOrLocalCenter');
+    , localStrings = require('./ui/localizedStrings');
 
 var menus = [{
     title: ''
     , sub: toLocal(localStrings.readOffline)
-    , feeds: [getLatestAnalysis()]
-}];
-
-function getLanguage () {
-    var key = getKeyForLanguageOrLocalCenter();
-    var language = 'en';
-    if (['ar'].indexOf(key) > -1) {
-        language = key;
-    }
-    return language
-}
-
-function getLatestAnalysis () {
-    var key = getKeyForLanguageOrLocalCenter();
-    var isLang = ['en', 'ar'].indexOf(key) > -1;
-    var language = getLanguage();
-    var urls = {
-        en: 'http://carnegieendowment.org/rss/solr/?fa=AppDiwanEn'
-        , ar: 'http://carnegieendowment.org/rss/solr/?fa=AppDiwanAr'
-    };
-    return {
-        url: urls[key]
+    , feeds: [{
+        url: 'http://carnegieendowment.org/rss/solr/?fa=AppDiwanEn'
         , name: toLocal(localStrings.latestAnalysis)
-        , filename: (isLang ? 'global-' : 'center-') + key + '.json'
+        , filename: 'diwan-en.json'
         , type: 'json'
         , required: true
-        , language: language
-    }
-}
+        , language: 'en'
+    }, {
+        url: 'http://carnegieendowment.org/rss/solr/?fa=AppDiwanAr'
+        , name: toLocal(localStrings.latestAnalysis)
+        , filename: 'diwan-ar.json'
+        , type: 'json'
+        , required: true
+        , language: 'ar'
+    }]
+}];
 
 module.exports = menus;

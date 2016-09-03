@@ -7,4 +7,4 @@ module.exports = function (filename) {
 			getFile(filesystem, filename).then(resolve, reject);
 		}, reject)
 	})
-}
+};

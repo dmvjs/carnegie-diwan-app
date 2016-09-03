@@ -7,6 +7,12 @@
         "files": {
             "framework": {
                 "parents": {
+                    "CoreTelephony.framework": [
+                        {
+                            "xml": false,
+                            "count": 2
+                        }
+                    ],
                     "SystemConfiguration.framework": [
                         {
                             "xml": false,
@@ -70,12 +76,6 @@
                             "xml": false,
                             "count": 2
                         }
-                    ],
-                    "CoreTelephony.framework": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
                     ]
                 }
             },
@@ -83,11 +83,19 @@
                 "parents": {
                     "/*": [
                         {
+                            "xml": "<feature name=\"Carrier\"><param name=\"ios-package\" value=\"Carrier\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"UniversalAnalytics\"><param name=\"ios-package\" value=\"UniversalAnalyticsPlugin\" /></feature>",
                             "count": 1
                         },
                         {
                             "xml": "<feature name=\"Globalization\"><param name=\"ios-package\" value=\"CDVGlobalization\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Sim\"><param name=\"ios-package\" value=\"Sim\" /></feature>",
                             "count": 1
                         },
                         {
@@ -121,9 +129,15 @@
                         {
                             "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
-                        },
+                        }
+                    ]
+                }
+            },
+            "*-Info.plist": {
+                "parents": {
+                    "NSAppTransportSecurity": [
                         {
-                            "xml": "<feature name=\"Carrier\"><param name=\"ios-package\" value=\"Carrier\" /></feature>",
+                            "xml": "<dict><key>NSAllowsArbitraryLoads</key><true /></dict>",
                             "count": 1
                         }
                     ]
@@ -132,38 +146,44 @@
         }
     },
     "installed_plugins": {
+        "br.com.dtmtec.plugins.carrier": {
+            "PACKAGE_NAME": "com.ceip.diwan"
+        },
         "com.danielcwilson.plugins.googleanalytics": {
-            "PACKAGE_NAME": "com.ceip.carnegie"
+            "PACKAGE_NAME": "com.ceip.diwan"
         },
         "cordova-plugin-globalization": {
-            "PACKAGE_NAME": "com.ceip.carnegie"
+            "PACKAGE_NAME": "com.ceip.diwan"
+        },
+        "cordova-plugin-sim": {
+            "PACKAGE_NAME": "com.ceip.diwan"
         },
         "nl.x-services.plugins.socialsharing": {
-            "PACKAGE_NAME": "com.ceip.carnegie"
+            "PACKAGE_NAME": "com.ceip.diwan"
         },
         "org.apache.cordova.device": {
-            "PACKAGE_NAME": "com.ceip.carnegie"
+            "PACKAGE_NAME": "com.ceip.diwan"
         },
         "org.apache.cordova.dialogs": {
-            "PACKAGE_NAME": "com.ceip.carnegie"
+            "PACKAGE_NAME": "com.ceip.diwan"
         },
         "org.apache.cordova.file": {
-            "PACKAGE_NAME": "com.ceip.carnegie"
+            "PACKAGE_NAME": "com.ceip.diwan"
         },
         "org.apache.cordova.file-transfer": {
-            "PACKAGE_NAME": "com.ceip.carnegie"
+            "PACKAGE_NAME": "com.ceip.diwan"
         },
         "org.apache.cordova.inappbrowser": {
-            "PACKAGE_NAME": "com.ceip.carnegie"
+            "PACKAGE_NAME": "com.ceip.diwan"
         },
         "org.apache.cordova.network-information": {
-            "PACKAGE_NAME": "com.ceip.carnegie"
+            "PACKAGE_NAME": "com.ceip.diwan"
         },
         "org.apache.cordova.splashscreen": {
-            "PACKAGE_NAME": "com.ceip.carnegie"
+            "PACKAGE_NAME": "com.ceip.diwan"
         },
-        "br.com.dtmtec.plugins.carrier": {
-            "PACKAGE_NAME": "com.ceip.carnegie"
+        "sk.kcorp.cordova.ios-security": {
+            "PACKAGE_NAME": "com.ceip.diwan"
         }
     },
     "dependent_plugins": {}

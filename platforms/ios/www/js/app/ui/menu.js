@@ -72,8 +72,8 @@ var config = require('../config')
 						var obj = (JSON.parse(contents.target._result));
 						update(filename, toLocal(localStrings.updatedColon) + date.getFriendlyDate(obj));
 						box.addClass('checked');
-					}, function (e){console.log(e)});
-				}, function (e){console.log(e)});
+					}, function (e){console.log(e);console.log(filename)});
+				}, function (e){console.log(e);console.log(filename)});
 
 				list.append(item);
 			})

@@ -1,6 +1,13 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
+        "file": "plugins/br.com.dtmtec.plugins.carrier/www/carrier.js",
+        "id": "br.com.dtmtec.plugins.carrier.Carrier",
+        "clobbers": [
+            "window.plugins.carrier"
+        ]
+    },
+    {
         "file": "plugins/com.danielcwilson.plugins.googleanalytics/www/analytics.js",
         "id": "com.danielcwilson.plugins.googleanalytics.UniversalAnalytics",
         "clobbers": [
@@ -19,6 +26,13 @@ module.exports = [
         "id": "cordova-plugin-globalization.globalization",
         "clobbers": [
             "navigator.globalization"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-sim/www/sim.js",
+        "id": "cordova-plugin-sim.Sim",
+        "merges": [
+            "window.plugins.sim"
         ]
     },
     {
@@ -230,20 +244,15 @@ module.exports = [
         "clobbers": [
             "navigator.splashscreen"
         ]
-    },
-    {
-        "file": "plugins/br.com.dtmtec.plugins.carrier/www/carrier.js",
-        "id": "br.com.dtmtec.plugins.carrier.Carrier",
-        "clobbers": [
-            "window.plugins.carrier"
-        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
+    "br.com.dtmtec.plugins.carrier": "1.0.0",
     "com.danielcwilson.plugins.googleanalytics": "0.6.1",
     "cordova-plugin-globalization": "1.0.4-dev",
+    "cordova-plugin-sim": "1.2.1",
     "nl.x-services.plugins.socialsharing": "4.3.19",
     "org.apache.cordova.device": "0.3.0",
     "org.apache.cordova.dialogs": "0.3.0",
@@ -252,7 +261,7 @@ module.exports.metadata =
     "org.apache.cordova.inappbrowser": "0.6.0",
     "org.apache.cordova.network-information": "0.2.15",
     "org.apache.cordova.splashscreen": "1.0.0",
-    "br.com.dtmtec.plugins.carrier": "1.0.0"
+    "sk.kcorp.cordova.ios-security": "0.3.0"
 }
 // BOTTOM OF METADATA
 });

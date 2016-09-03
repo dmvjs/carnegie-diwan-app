@@ -108,6 +108,9 @@
         },
         "br.com.dtmtec.plugins.carrier": {
             "PACKAGE_NAME": "com.ceip.carnegie"
+        },
+        "sk.kcorp.cordova.ios-security": {
+            "PACKAGE_NAME": "com.ceip.carnegie"
         }
     },
     "dependent_plugins": {}
